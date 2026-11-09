@@ -60,9 +60,9 @@ Everything written on the site is in `src/data/content.ts`. Each string in an ar
 
 - Loading animation, then **Begin the Investigation** reveals the rest and the navigation.
 - Bumble card: drag right, or use the buttons. A left swipe bounces back with a joke.
-- Timeline, company cards (hover or tap), the envelope letter, drama meter, appreciation badge, Chotu DON hotline, Cat CEO Approval Meter, compliance checklist and score, live countdown, golden envelope, ORDER ICE CREAM and CASE CLOSED?.
+- Timeline, company cards (hover or tap), the envelope letter, drama meter, appreciation badge, Chotu DON hotline, Cat CEO Approval Meter, compliance checklist and score, live countdown, final envelope, ORDER ICE CREAM and CASE CLOSED?.
 - The countdown shows "THE BIG DAY HAS ARRIVED." once February 3, 2027 passes and never breaks.
-- Six easter eggs: a hidden dot at the end of the timeline, a faint paw in the cats section, a tiny gold button in the footer, a "CEO has been detected smiling" notification after the swipe, a "please restart human" notification in the compliance section, and DO NOT PRESS. The footer counts secrets found.
+- Six easter eggs: a hidden dot at the end of the timeline, a faint paw in the cats section, a tiny hidden button in the footer, a "CEO has been detected smiling" notification after the swipe, a "please restart human" notification in the compliance section, and DO NOT PRESS. The footer counts secrets found.
 - Sound is off until the visitor presses the toggle in the top bar. It is synthesised in the browser, so there are no audio files.
 - Progress (intro seen, swipe, checklist, secrets) is saved in localStorage. "Replay the intro" in the footer clears it.
 - `prefers-reduced-motion` is respected.
@@ -77,7 +77,7 @@ src/
   sections/             Hero, Bumble, Promise, Note, Overthinking, Appreciation,
                         Don, Cats, Compliance, Unsaid, Countdown, Final
   components/           Photo (safe placeholder), Reveal (Section, Split), Button,
-                        FxCanvas, Header, Notifier, Art, Button, Footer
+                        FxCanvas, Header, Notifier, Art, Footer
   lib/                  store (localStorage), notifications, fx, audio
   styles/index.css
 public/images/          your photos go here
