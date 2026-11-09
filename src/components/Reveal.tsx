@@ -18,11 +18,42 @@ export function Reveal({ children, delay = 0, y = 22, className = '' }: { childr
   );
 }
 
-/** A list of paragraphs that slide up one by one as they enter the screen. */
-export function Lines({ lines, className = '', lineClass = 'body-copy', gap = 'gap-4' }: { lines: string[]; className?: string; lineClass?: string; gap?: string }) {
+/** Join consecutive short lines into paragraphs so long copy does not become a tall stack of one-liners. */
+export function groupLines(lines: string[], budget = 200): string[] {
+  const out: string[] = [];
+  let cur = '';
+  for (const l of lines) {
+    if (!cur) cur = l;
+    else if ((cur + ' ' + l).length <= budget) cur += ' ' + l;
+    else {
+      out.push(cur);
+      cur = l;
+    }
+  }
+  if (cur) out.push(cur);
+  return out;
+}
+
+/** Paragraphs that slide up one by one as they enter the screen. Short lines are grouped (set group={false} to keep one per line). */
+export function Lines({
+  lines,
+  className = '',
+  lineClass = 'body-copy',
+  gap = 'gap-4',
+  group = true,
+  budget = 200,
+}: {
+  lines: string[];
+  className?: string;
+  lineClass?: string;
+  gap?: string;
+  group?: boolean;
+  budget?: number;
+}) {
+  const items = group ? groupLines(lines, budget) : lines;
   return (
     <div className={`flex flex-col ${gap} ${className}`}>
-      {lines.map((l, i) => (
+      {items.map((l, i) => (
         <Reveal key={i} y={14}>
           <p className={lineClass}>{l}</p>
         </Reveal>
@@ -33,7 +64,7 @@ export function Lines({ lines, className = '', lineClass = 'body-copy', gap = 'g
 
 export function SectionHeading({ kicker, title, date }: { kicker: string; title: string; date?: string }) {
   return (
-    <header className="mb-8">
+    <header className="mb-6">
       <Reveal>
         <p className="kicker mb-3">{kicker}</p>
         <h2 className="text-3xl font-extrabold uppercase leading-[1.12] tracking-tight sm:text-4xl">{title}</h2>
@@ -44,15 +75,15 @@ export function SectionHeading({ kicker, title, date }: { kicker: string; title:
   );
 }
 
-export type Theme = 'dark' | 'light' | 'beige' | 'maroon';
+export type Theme = 'dark' | 'light' | 'beige' | 'maroon' | 'indigo';
 
 /** A full-width band with its own colour theme and a corporate index row on top. */
 export function Section({ id, index, theme, children, className = '' }: { id: string; index: number; theme: Theme; children: ReactNode; className?: string }) {
   const label = content.sections[index - 1]?.label ?? '';
   return (
-    <section id={id} data-section className={`themed theme-${theme} relative overflow-x-clip px-5 py-16 sm:px-8 md:py-24 ${className}`}>
+    <section id={id} data-section className={`themed theme-${theme} relative overflow-x-clip px-5 py-12 sm:px-8 md:py-16 ${className}`}>
       <div className="mx-auto w-full max-w-6xl">
-        <div className="mb-12 flex items-center justify-between border-b border-fg/20 pb-4 text-[0.68rem] font-semibold uppercase tracking-[0.25em] text-mute">
+        <div className="mb-8 flex items-center justify-between border-b border-fg/20 pb-3 text-[0.68rem] font-semibold uppercase tracking-[0.25em] text-mute">
           <span>{String(index).padStart(2, '0')} / 12</span>
           <span>{label}</span>
         </div>
@@ -65,7 +96,7 @@ export function Section({ id, index, theme, children, className = '' }: { id: st
 /** Two columns. Text sits left, visual right; flip swaps them on desktop. Stacks on mobile (text first). */
 export function Split({ text, visual, flip = false, sticky = true }: { text: ReactNode; visual: ReactNode; flip?: boolean; sticky?: boolean }) {
   return (
-    <div className="grid items-start gap-12 md:grid-cols-2 md:gap-16">
+    <div className="grid items-start gap-12 md:grid-cols-2 md:gap-12">
       <div className={flip ? 'md:order-2' : ''}>{text}</div>
       <div className={`${flip ? 'md:order-1' : ''} ${sticky ? 'md:sticky md:top-24' : ''}`}>{visual}</div>
     </div>

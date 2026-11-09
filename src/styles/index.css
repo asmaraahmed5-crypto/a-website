@@ -2,39 +2,42 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Palette: black, white, beige, maroon. Solid colours only, no gradients. */
+/* Palette: simply black and white (plus greys). Solid colours only, no gradients. */
 :root,
 .theme-dark {
   --bg: 11 11 11;
   --fg: 255 255 255;
-  --accent: 233 223 207;
-  --mute: 178 172 162;
-  --card: 26 26 26;
+  --accent: 255 255 255;
+  --mute: 170 170 170;
+  --card: 28 28 28;
   --onaccent: 11 11 11;
 }
 .theme-light {
   --bg: 255 255 255;
   --fg: 11 11 11;
-  --accent: 107 31 42;
-  --mute: 92 92 92;
-  --card: 246 241 232;
+  --accent: 11 11 11;
+  --mute: 82 82 82;
+  --card: 244 244 244;
   --onaccent: 255 255 255;
 }
 .theme-beige {
-  --bg: 233 223 207;
+  /* light grey band (name kept from the old beige theme) */
+  --bg: 238 238 238;
   --fg: 11 11 11;
-  --accent: 107 31 42;
-  --mute: 84 78 68;
-  --card: 246 241 232;
+  --accent: 11 11 11;
+  --mute: 82 82 82;
+  --card: 255 255 255;
   --onaccent: 255 255 255;
 }
-.theme-maroon {
-  --bg: 107 31 42;
+.theme-maroon,
+.theme-indigo {
+  /* dark grey band (names kept from earlier palettes) */
+  --bg: 28 28 28;
   --fg: 255 255 255;
-  --accent: 233 223 207;
-  --mute: 226 208 208;
-  --card: 84 22 33;
-  --onaccent: 84 22 33;
+  --accent: 255 255 255;
+  --mute: 185 185 185;
+  --card: 44 44 44;
+  --onaccent: 11 11 11;
 }
 
 html {
@@ -47,6 +50,10 @@ html {
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+  .animate-marquee,
+  .animate-marquee-vertical {
+    animation: none !important;
   }
   *,
   *::before,
@@ -74,7 +81,7 @@ body {
 }
 
 ::selection {
-  background: rgb(107 31 42);
+  background: rgb(110 110 110);
   color: #fff;
 }
 
@@ -115,4 +122,91 @@ button {
   font-weight: 800;
   letter-spacing: 0.16em;
   text-transform: uppercase;
+}
+
+/* ── Flip countdown cards (21st.dev FlipCountdown), solid colours, 7px corners ── */
+@keyframes flip-top {
+  100% {
+    transform: rotateX(-180deg);
+  }
+}
+@keyframes flip-bottom {
+  100% {
+    transform: rotateX(0deg);
+  }
+}
+
+.flip-countdown-container {
+  display: inline-flex;
+  gap: clamp(3px, 0.4vw, 6px);
+}
+.flip-unit {
+  --fw: clamp(28px, 5.2vw, 88px);
+  --fh: calc(var(--fw) * 1.5);
+  position: relative;
+  width: var(--fw);
+  height: var(--fh);
+  perspective: 260px;
+  font-size: calc(var(--fh) * 0.62);
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  color: var(--flip-card-text, #ffffff);
+}
+.flip-card {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  overflow: hidden;
+  text-align: center;
+  background: var(--flip-card-bg, #1c1c1c);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.flip-card__top,
+.flipper__top {
+  top: 0;
+  line-height: var(--fh);
+  border-radius: 7px 7px 0 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.55);
+}
+.flip-card__bottom {
+  bottom: 0;
+  line-height: 0;
+  border-radius: 0 0 7px 7px;
+}
+.flipper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  z-index: 3;
+  transform-origin: 50% 100%;
+  transform-style: preserve-3d;
+}
+.flipper .flip-card {
+  height: 100%;
+}
+.flipper__bottom {
+  top: 0;
+  line-height: 0;
+  border-radius: 0 0 7px 7px;
+  transform: rotateX(180deg);
+  transform-origin: 50% 50%;
+}
+.flipper.is-flipping {
+  animation: flip-top 0.55s ease-in forwards;
+}
+.flip-colon {
+  margin-top: calc(clamp(28px, 5.2vw, 88px) * 0.45);
+  font-size: clamp(1.1rem, 2.4vw, 2.4rem);
+  font-weight: 800;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.7);
+}
+@media (prefers-reduced-motion: reduce) {
+  .flipper.is-flipping {
+    animation-duration: 0.01ms;
+  }
 }

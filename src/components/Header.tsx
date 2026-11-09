@@ -4,6 +4,7 @@ import { Volume2, VolumeX } from 'lucide-react';
 import { content } from '../data/content';
 import { setSound } from '../lib/audio';
 import { scrollToId } from '../lib/fx';
+import { pad2, useCountdown } from '../lib/useCountdown';
 
 /** Fixed corporate top bar: brand, section counter, jump menu, sound toggle, scroll progress. */
 export default function Header({ showNav }: { showNav: boolean }) {
@@ -11,6 +12,7 @@ export default function Header({ showNav }: { showNav: boolean }) {
   const scaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 28, mass: 0.4 });
   const [active, setActive] = useState(0);
   const [sound, setSoundOn] = useState(false);
+  const left = useCountdown();
 
   useEffect(() => {
     if (!showNav) return;
@@ -32,9 +34,27 @@ export default function Header({ showNav }: { showNav: boolean }) {
   return (
     <header className="fixed inset-x-0 top-0 z-[65] h-14 border-b border-white/15 bg-ink text-white">
       <div className="mx-auto flex h-full max-w-6xl items-center justify-between gap-3 px-4 sm:px-8">
-        <button type="button" onClick={() => window.scrollTo({ top: 0 })} className="text-[0.72rem] font-extrabold uppercase tracking-[0.22em]">
+        <button type="button" onClick={() => window.scrollTo({ top: 0 })} className="whitespace-nowrap text-[0.68rem] font-extrabold uppercase tracking-[0.16em] sm:text-[0.72rem] sm:tracking-[0.22em]">
           The Road to <span className="text-beige">30</span>
         </button>
+
+        <div
+          role="timer"
+          aria-label={left.done ? 'The big day has arrived' : `${left.days} days, ${left.hours} hours and ${left.minutes} minutes until the big three-zero`}
+          className="flex items-center gap-1.5 whitespace-nowrap rounded border border-white/25 px-2 py-1.5 text-[0.6rem] font-bold uppercase tracking-[0.12em] tabular-nums text-beige sm:gap-2 sm:px-2.5 sm:text-[0.62rem] sm:tracking-[0.16em]"
+        >
+          {left.done ? (
+            <span>30 today</span>
+          ) : (
+            <>
+              <span>{left.days}d</span>
+              <span className="hidden sm:inline">
+                {pad2(left.hours)}:{pad2(left.minutes)}:{pad2(left.seconds)}
+              </span>
+              <span className="text-white/60">to 30</span>
+            </>
+          )}
+        </div>
 
         {showNav && (
           <div className="hidden items-center gap-3 text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-white/70 md:flex">

@@ -4,6 +4,8 @@ import { AlertTriangle, Gauge } from 'lucide-react';
 import { content } from '../data/content';
 import { Lines, Reveal, Section, SectionHeading, Split } from '../components/Reveal';
 import Button from '../components/Button';
+import LoopClip from '../components/LoopClip';
+import { clips } from '../data/photos';
 import { sfx } from '../lib/audio';
 
 const o = content.overthinking;
@@ -88,6 +90,9 @@ export default function Overthinking() {
           <>
             <SectionHeading kicker={o.kicker} title={o.title} />
             <Lines lines={o.copy} />
+            <Reveal className="mt-6">
+              <LoopClip src={clips.dancingMen} label={o.clipLabel} caption={o.clipCaption} aspect="aspect-video" />
+            </Reveal>
           </>
         }
         visual={visual}

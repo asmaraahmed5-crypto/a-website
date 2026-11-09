@@ -20,12 +20,21 @@ export const content = {
     { id: 'final', label: 'The Ice Cream Case' },
   ],
 
+  ticker: {
+    top: ['Breaking: CEO has not slept properly', 'Meeting agenda: none', 'Cats: still in charge', 'Seventeen tabs open', 'Ice cream plan: cancelled again', 'Smoke less', 'Chotu DON on standby'],
+    bottom: ['Breaking: the ice cream case remains open', 'CEO detected smiling', 'Cats have approved this website', 'Do not press the red button', 'Sleep: optional (not recommended)', 'Reply-all was a mistake'],
+  },
+
   hero: {
     eyebrow: 'NOVEMBER 2026',
     title: 'THE ROAD TO 30',
     subtitle: 'A November Production. A February Premiere.',
     loading: 'Preparing an unnecessarily elaborate surprise for the Founder & CEO…',
     cta: 'Begin the Investigation',
+    status: 'Countdown live',
+    agendaLead: 'A November production for the Founder & CEO of Firefox Technologies and Firefox Publishers. On today’s agenda: ',
+    agenda: ['appreciation', 'questionable jokes', 'cats in charge', 'zero deadlines', 'ice cream justice', 'a very elaborate surprise'],
+    scrollHint: 'Scroll to open the file',
     memo: [
       'It’s November.',
       'And how could you possibly expect me not to come up with some amazing ideas?',
@@ -39,6 +48,24 @@ export const content = {
       'Just you, a little appreciation, a few questionable jokes, and something that might make you wonder whether I should be given access to the company’s creative department.',
       'Keep scrolling, Founder. The presentation has officially begun.',
     ],
+    // layout for the opening memo (the same words as above, arranged as an About-Us style section)
+    memoUi: {
+      badge: 'Opening memo',
+      title: 'From the creative department',
+      intro: 'It’s November. And how could you possibly expect me not to come up with some amazing ideas? So, here’s a catch, CEO.',
+      items: [
+        { side: 'left', title: 'The catch', text: 'I know you’ve been working ridiculously hard lately. Running around, building things, figuring things out, and apparently treating sleep like an optional subscription you forgot to renew.' },
+        { side: 'left', title: 'Pause', text: 'So, for once, why don’t you pause?' },
+        { side: 'left', title: 'Breathe and smile', text: 'Take a breath. And smile a little.' },
+        { side: 'right', title: 'The agenda', text: 'Because this time, the meeting agenda is different.' },
+        { side: 'right', title: 'No deadlines', text: 'No deadlines. No business discussions. No complicated decisions.' },
+        { side: 'right', title: 'The plan', text: 'Just you, a little appreciation, a few questionable jokes, and something that might make you wonder whether I should be given access to the company’s creative department.' },
+      ] as { side: 'left' | 'right'; title: string; text: string }[],
+      clipLabel: 'A tired man asleep at his desk at night, next to his laptop',
+      clipCaption: 'Exhibit A: the CEO, “resting his eyes”',
+      closingTitle: 'Keep scrolling, Founder.',
+      closingText: 'The presentation has officially begun.',
+    },
   },
 
   bumble: {
@@ -57,6 +84,8 @@ export const content = {
       'This is simply a reminder that sometimes the most unexpected beginnings turn into chapters worth keeping.',
       'And apparently, some people are much harder to get rid of than others.',
     ],
+    reactionCaption: 'The CEO, seconds after the right swipe',
+    reactionLabel: 'A man laughing out loud at his phone',
     cardName: 'The Founder & CEO',
     cardLine: 'Ambitious. Forgets things. Owns cats.',
     hint: 'Drag the card to the right, or use the buttons.',
@@ -77,12 +106,12 @@ export const content = {
       'We made it through two incredible ones.',
     ],
     timeline: [
-      { label: 'The Bumble right swipe', note: 'An unexpected beginning.' },
-      { label: '01.07.2026', note: 'A promise to build something together.' },
-      { label: 'Firefox Technologies', note: 'Chapter one.' },
-      { label: 'Firefox Publishers', note: 'Chapter two.' },
-      { label: 'November 2026', note: 'This unnecessarily elaborate surprise.' },
-      { label: '03.02.2027', note: 'The big three-zero.' },
+      { year: 'Day zero', title: 'The Bumble right swipe', note: 'An unexpected beginning.' },
+      { year: '01.07.2026', title: 'The promise', note: 'A promise to build something together.' },
+      { year: 'Chapter one', title: 'Firefox Technologies', note: 'The first name on the door.' },
+      { year: 'Chapter two', title: 'Firefox Publishers', note: 'The second name on the door.' },
+      { year: 'November 2026', title: 'The surprise', note: 'This unnecessarily elaborate website.' },
+      { year: '03.02.2027', title: 'The big three-zero', note: 'Cake. Questionable speeches. Ice cream, allegedly.' },
     ],
     companies: [
       {
@@ -166,6 +195,8 @@ export const content = {
       'Terms and conditions apply.',
       'The creative department reserves the right to introduce additional chaos whenever necessary.',
     ],
+    clipCaption: 'Live feed: the seventeen tabs',
+    clipLabel: 'Three men in bright outfits dancing to upbeat music',
     meterLabel: 'Drama Level',
     meterButton: 'Run drama diagnostics',
     meterMessages: [
@@ -214,6 +245,8 @@ export const content = {
       { label: 'Founder energy', value: 99, display: '99%' },
     ],
     button: 'CEO Performance: 100% Ambition',
+    clipLabel: 'A team of business people in a boardroom applauding',
+    clipCaption: 'The board, reviewing your report card',
     badgeTitle: 'Achievement unlocked',
     badge: 'Survived another year of chaos.',
   },
@@ -246,6 +279,8 @@ export const content = {
       'Make your own decisions.',
       'And don’t forget to enjoy the process occasionally.',
     ],
+    clipCaption: 'Chotu DON, reporting for duty',
+    clipLabel: 'A grey cat in dark glasses slowly turning its head',
     hotline: 'Emergency Chotu DON Hotline',
     hotlineLines: [
       'Chotu DON is currently available.',
@@ -306,6 +341,17 @@ export const content = {
       'If the cats ever become shareholders, please inform me immediately.',
       'I would like to negotiate my position before the company undergoes a hostile takeover.',
     ],
+    galleryDescription: 'Six senior cats. Zero qualifications. Full authority. Hover (or tap) a cat to hear their statement.',
+    team: [
+      { name: 'Marshmallow', width: 683, height: 1024, role: 'VP of Naps', quote: 'Naps are board-approved.', alt: 'A fluffy white and ginger cat resting', color: '#F0F0F0', text: '#0B0B0B' },
+      { name: 'The Silver Duchess', width: 1024, height: 685, role: 'Head of Silent Judgement', quote: 'I have seen your browser history.', alt: 'A fluffy silver long-haired cat sitting', color: '#C8C8C8', text: '#0B0B0B' },
+      { name: 'High-Five Intern', width: 1024, height: 683, role: 'Intern (snacks only)', quote: 'Hired for enthusiasm, retained for snacks.', alt: 'A ginger and white kitten raising a paw', color: '#0B0B0B', text: '#FFFFFF' },
+      { name: 'Captain Marmalade', width: 1024, height: 683, role: 'Director of 3 AM Operations', quote: 'Meeting at 3 AM. Attendance mandatory.', alt: 'A fluffy ginger and white cat outdoors', color: '#6B6B6B', text: '#FFFFFF' },
+      { name: 'The Auditor', width: 1024, height: 683, role: 'Garden Compliance', quote: 'Stares at the garden. Files no report.', alt: 'A long-haired tabby and white cat looking away', color: '#DCDCDC', text: '#0B0B0B' },
+      { name: 'Fluffy II', width: 969, height: 1024, role: 'Founding member, est. 1890', quote: 'Still unpaid. Still here.', alt: 'A vintage engraving of a very fluffy cat', color: '#2A2A2A', text: '#FFFFFF' },
+    ],
+    clipCaption: 'Board meeting in progress. Minutes: pending.',
+    clipLabel: 'A Siamese cat sitting inside a hat',
     meterTitle: 'Cat CEO Approval Meter',
     meterButton: 'Request approval',
     approvals: [
@@ -333,6 +379,8 @@ export const content = {
       { id: 'forget', title: 'Stop forgetting things.', text: 'Some people have excellent memories. Others require reminders, calendar notifications, and potentially a dedicated administrative department. We are not naming names.' },
       { id: 'posts', title: 'Please stop posting those Playboy-wali pictures.', text: 'Allah ka wasta hai. We are trying to maintain some respectable standards around here. The internet has enough problems already.' },
     ],
+    clipCaption: 'Reference footage: proper sleep',
+    clipLabel: 'A cat taking a nap',
     scoreLabel: 'CEO Compliance Score',
     feedback: [
       'Zero. Concerning, but not surprising.',
@@ -351,6 +399,17 @@ export const content = {
   unsaid: {
     kicker: 'Off the record',
     title: 'THE THINGS I CANNOT SAY DIRECTLY',
+    chat: {
+      contactName: 'The Founder & CEO',
+      label: 'A chat screen where a message is typed, deleted and retyped, but never sent',
+      caption: 'Draft message: typed, deleted, retyped. Status: not sent.',
+      history: [
+        { from: 'me' as const, text: 'So, about that thing I wanted to say…' },
+        { from: 'them' as const, text: 'Yes?' },
+        { from: 'me' as const, text: 'Give me a minute.' },
+      ],
+      drafts: ['I just wanted to say…', 'Thank you for…', 'You are doing great and…', 'Anyway. Ice cream?'],
+    },
     copy: [
       'And because you forget things…',
       'I’m not talking either.',
@@ -397,6 +456,8 @@ export const content = {
       'And I will have successfully avoided being fired from the unofficial creative department.',
     ],
     outro: ['No promises about the last one.', 'But the mission continues.'],
+    clipCaption: 'Preview: the cake, February 3. Cigarettes, skeleton and ash included. Smoke less.',
+    cakeAlt: 'A white birthday cake with a little skeleton lying in an ashtray on top, surrounded by cigarettes and ash',
     doNotPress: 'DO NOT PRESS',
     egg6: {
       title: 'Decision-making audit',
@@ -450,6 +511,8 @@ export const content = {
       'No excuses.',
       'No cancellations.',
     ],
+    iceClipCaption: 'Footage of the ice cream you owe',
+    iceClipLabel: 'A woman enjoying an ice cream cone in a park',
     closed: 'CASE CLOSED?',
     closedReply: 'NOPE. STILL WAITING.',
   },
@@ -467,6 +530,6 @@ export const content = {
 
   footer: {
     line: 'Produced by the unofficial Creative Department · November 2026',
-    replay: 'Replay the intro',
+    replay: 'Reset my progress',
   },
 };

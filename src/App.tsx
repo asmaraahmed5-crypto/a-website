@@ -3,6 +3,8 @@ import Footer from './components/Footer';
 import FxCanvas from './components/FxCanvas';
 import Header from './components/Header';
 import Notifier from './components/Notifier';
+import TickerBand from './components/TickerBand';
+import { content } from './data/content';
 import Hero from './sections/Hero';
 import Bumble from './sections/Bumble';
 import PromiseSection from './sections/Promise';
@@ -15,34 +17,30 @@ import Compliance from './sections/Compliance';
 import Unsaid from './sections/Unsaid';
 import Countdown from './sections/Countdown';
 import Final from './sections/Final';
-import { useSaved } from './lib/store';
 
 export default function App() {
-  const { begun } = useSaved();
   return (
     <MotionConfig reducedMotion="user">
       <FxCanvas />
-      <Header showNav={begun} />
+      <Header showNav />
       <Notifier />
       <main>
         <Hero />
-        {begun && (
-          <>
-            <Bumble />
-            <PromiseSection />
-            <Note />
-            <Overthinking />
-            <Appreciation />
-            <Don />
-            <Cats />
-            <Compliance />
-            <Unsaid />
-            <Countdown />
-            <Final />
-          </>
-        )}
+        <TickerBand items={content.ticker.top} tone="ink" />
+        <Bumble />
+        <PromiseSection />
+        <Note />
+        <Overthinking />
+        <Appreciation />
+        <Don />
+        <Cats />
+        <Compliance />
+        <Unsaid />
+        <Countdown />
+        <TickerBand items={content.ticker.bottom} reverse tone="ink" />
+        <Final />
       </main>
-      {begun && <Footer />}
+      <Footer />
     </MotionConfig>
   );
 }

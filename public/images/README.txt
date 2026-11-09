@@ -1,13 +1,17 @@
-Drop your photos in this folder using these exact file names (or edit src/data/photos.ts):
+Photos used by the site. Every picture here is CC0 / public domain except the company logos
+and salman.webp (his own photo). Replace any file with your own, keeping the name (or edit src/data/photos.ts).
 
-hero.jpg                  opening cinematic portrait
-bumble.jpg                swipe card photo
-business.jpg              CEO appreciation report photo
-firefox-technologies.jpg  logo or photo for the Technologies card
-firefox-publishers.jpg    logo or photo for the Publishers card
-founder.jpg               quiet candid photo
+hero-cake.jpg             hero reveal: birthday cake
+salman.webp               his photo (not used right now; set photos.hero to '/images/salman.webp' to bring it back)
+bumble.jpg                swipe card
+business.jpg              CEO Appreciation Report
+firefox-technologies.png  logo (from firefoxtechnologies.com)
+firefox-publishers.png    logo (from firefoxpublisher.com)
+founder.jpg               "The Things I Cannot Say Directly"
 cat-1.jpg, cat-2.jpg      cat gallery (add more in photos.ts)
-funny.jpg                 chotu DON + compliance notice photo
-birthday.jpg              countdown photo
+funny.jpg                 Chotu DON
+compliance.jpg            compliance notice
+birthday.jpg              countdown
+memo/                     opening memo pictures
 
-Missing files show an elegant placeholder instead of a broken image.
+Sources and licences: see CREDITS.txt.

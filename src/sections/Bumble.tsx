@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { AnimatePresence, motion, useAnimationControls, useMotionValue, useTransform, type PanInfo } from 'framer-motion';
 import { Check, RotateCcw, X } from 'lucide-react';
 import { content } from '../data/content';
-import { photos } from '../data/photos';
+import { clips } from '../data/photos';
 import { Lines, Section, SectionHeading, Split } from '../components/Reveal';
 import Button from '../components/Button';
-import Photo from '../components/Photo';
+import LoopClip from '../components/LoopClip';
 import { burst, scrollToId } from '../lib/fx';
 import { sfx } from '../lib/audio';
 import { foundEgg, setSaved, useSaved } from '../lib/store';
@@ -68,7 +68,9 @@ export default function Bumble() {
           style={{ x, rotate }}
           className="absolute inset-0 cursor-grab overflow-hidden rounded border-2 border-ink bg-ink shadow-xl active:cursor-grabbing"
         >
-          <Photo src={photos.bumble} alt="The Founder and CEO" hint="public/images/bumble.jpg" className="h-full w-full !rounded-none" />
+          <div className="grid h-full w-full place-items-center bg-[#FFDB5B] px-8 pb-24">
+            <img src="/images/bumble-logo-color.svg" alt="Bumble" width={480} height={106} draggable={false} className="pointer-events-none h-auto w-full max-w-[240px]" />
+          </div>
           <motion.span style={{ opacity: likeOpacity }} className="stamp absolute left-4 top-5 -rotate-6 bg-white text-lg text-maroon">
             Right
           </motion.span>
@@ -101,6 +103,7 @@ export default function Bumble() {
           Matched
         </motion.span>
         <p className="text-2xl font-extrabold uppercase leading-tight">{b.success}</p>
+        <LoopClip src={clips.laughingPhone} label={b.reactionLabel} caption={b.reactionCaption} aspect="aspect-video" className="w-full text-left" />
         <Button onClick={() => scrollToId('promise')}>{b.cont}</Button>
         <button type="button" onClick={reset} className="inline-flex min-h-11 items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-mute hover:text-fg">
           <RotateCcw size={14} /> Swipe again

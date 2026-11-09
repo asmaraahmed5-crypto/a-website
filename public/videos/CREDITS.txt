@@ -1,0 +1,13 @@
+Short video clips from Mixkit (https://mixkit.co), used under the Mixkit Stock Video Free License
+(free for personal and commercial use, no attribution required).
+
+cat-glasses.mp4           "Cute gray cat with dark glasses turning his face" (id 49058)
+cat-hat.mp4               "Siamese cat inside a hat" (id 4103)
+dancing-men.mp4           "Three funny multicoloured men dancing to upbeat music" (id 44877)
+laughing-phone.mp4        "Man laughing out loud at his cell phone" (id 8741)
+happy-birthday-candles.mp4 "Cake with letter candles that say happy birthday" (id 50051)
+cat-nap.mp4               "Cat taking a nap" (id 4102)
+ice-cream-cone.mp4        "Woman licking an ice cream cone in the park" (id 48702)
+birthday-party.mp4       "Man blowing out the candles of a birthday cake" (id 45945), used in the hero
+asleep-at-desk.mp4        "Tired man sleeping at his desk in the office" (id 24055), used in the opening memo
+office-applause.mp4       "Business people applauding in the office" (id 23085), used in the CEO Appreciation Report

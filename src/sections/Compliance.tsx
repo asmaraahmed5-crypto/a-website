@@ -2,9 +2,9 @@ import { useEffect, useRef } from 'react';
 import { AnimatePresence, motion, useInView } from 'framer-motion';
 import { Check, ShieldAlert, ShieldCheck } from 'lucide-react';
 import { content } from '../data/content';
-import { photos } from '../data/photos';
+import { clips, photos } from '../data/photos';
 import { Reveal, Section, SectionHeading, Split } from '../components/Reveal';
-import Photo from '../components/Photo';
+import LoopClip from '../components/LoopClip';
 import { burst } from '../lib/fx';
 import { sfx } from '../lib/audio';
 import { foundEgg, setSaved, useSaved } from '../lib/store';
@@ -45,7 +45,7 @@ export default function Compliance() {
         <p className="body-copy mb-8 text-lg">{c.intro}</p>
       </Reveal>
       <Reveal>
-        <Photo src={photos.funny} alt="The Founder, mid-compliance review" hint="public/images/funny.jpg" parallax className="aspect-[16/10] w-full" />
+        <LoopClip src={clips.catNap} poster={photos.compliance} label={c.clipLabel} caption={c.clipCaption} aspect="aspect-[4/3]" />
       </Reveal>
     </>
   );

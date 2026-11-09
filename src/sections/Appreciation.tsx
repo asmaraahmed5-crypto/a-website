@@ -2,10 +2,10 @@ import { useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Award, Hand } from 'lucide-react';
 import { content } from '../data/content';
-import { photos } from '../data/photos';
+import { clips } from '../data/photos';
 import { Lines, Reveal, Section, SectionHeading, Split } from '../components/Reveal';
 import Button from '../components/Button';
-import Photo from '../components/Photo';
+import LoopClip from '../components/LoopClip';
 import { burstFrom } from '../lib/fx';
 import { sfx } from '../lib/audio';
 
@@ -25,7 +25,7 @@ export default function Appreciation() {
   const visual = (
     <Reveal>
       <div className="card overflow-hidden">
-        <Photo src={photos.business} alt="The Founder and CEO at work" hint="public/images/business.jpg" parallax className="aspect-[4/5] w-full !rounded-none" />
+        <LoopClip src={clips.officeApplause} label={a.clipLabel} caption={a.clipCaption} aspect="aspect-[16/10] md:aspect-[4/5]" className="!rounded-none !border-0" />
         <div className="border-t border-fg/15 p-6">
           <p className="kicker mb-4">Official report card</p>
           <ul className="flex flex-col gap-4">

@@ -1,48 +1,18 @@
-import { useEffect, useRef, useState } from 'react';
-import { AnimatePresence, motion, useInView } from 'framer-motion';
+import { useEffect, useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 import { content } from '../data/content';
-import { photos } from '../data/photos';
 import { Lines, Reveal, Section, SectionHeading, Split } from '../components/Reveal';
-import Photo from '../components/Photo';
+import AnimatedCountdown from '@/components/ui/animated-countdown';
 import { burst } from '../lib/fx';
 import { foundEgg } from '../lib/store';
 
 const c = content.countdown;
 const { year, monthIndex, day } = content.birthday;
-
-function remaining() {
-  const target = new Date(year, monthIndex, day, 0, 0, 0).getTime();
-  const diff = target - Date.now();
-  if (diff <= 0) return null;
-  const s = Math.floor(diff / 1000);
-  return { days: Math.floor(s / 86400), hours: Math.floor((s % 86400) / 3600), minutes: Math.floor((s % 3600) / 60), seconds: s % 60 };
-}
-
-function Unit({ value, label }: { value: number; label: string }) {
-  const text = String(value).padStart(2, '0');
-  return (
-    <div className="flex flex-col items-center gap-2">
-      <div className="card relative grid h-24 w-full place-items-center overflow-hidden">
-        <AnimatePresence mode="popLayout" initial={false}>
-          <motion.span key={text} initial={{ y: '60%', opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: '-60%', opacity: 0 }} transition={{ duration: 0.3, ease: 'easeOut' }} className="text-5xl font-extrabold tabular-nums sm:text-6xl">
-            {text}
-          </motion.span>
-        </AnimatePresence>
-      </div>
-      <span className="text-[0.62rem] font-bold uppercase tracking-[0.28em] text-accent">{label}</span>
-    </div>
-  );
-}
+const TARGET = new Date(year, monthIndex, day, 0, 0, 0);
 
 export default function Countdown() {
-  const [left, setLeft] = useState(remaining);
   const ref = useRef<HTMLDivElement>(null);
   const seen = useInView(ref, { once: true, margin: '0px 0px -25% 0px' });
-
-  useEffect(() => {
-    const id = window.setInterval(() => setLeft(remaining()), 1000);
-    return () => window.clearInterval(id);
-  }, []);
 
   useEffect(() => {
     if (seen) burst(undefined, window.innerHeight * 0.4, 70);
@@ -67,19 +37,13 @@ export default function Countdown() {
   const visual = (
     <div ref={ref} className="flex flex-col gap-8">
       <Reveal>
-        {left ? (
-          <div className="grid grid-cols-2 gap-4" role="timer" aria-label="Time until February 3, 2027">
-            <Unit value={left.days} label="Days" />
-            <Unit value={left.hours} label="Hours" />
-            <Unit value={left.minutes} label="Minutes" />
-            <Unit value={left.seconds} label="Seconds" />
-          </div>
-        ) : (
-          <p className="text-center text-4xl font-extrabold uppercase">{c.arrived}</p>
-        )}
+        <AnimatedCountdown targetDate={TARGET} completionMessage={c.arrived} onComplete={() => burst(undefined, undefined, 160)} ariaLabel="Time until February 3, 2027" />
       </Reveal>
       <Reveal>
-        <Photo src={photos.birthday} alt="The Founder, nearly thirty" hint="public/images/birthday.jpg" parallax className="aspect-[16/10] w-full" />
+        <figure className="mx-auto w-full max-w-sm overflow-hidden rounded border border-fg/20 bg-ink">
+          <img src="/images/skeleton-cigarette-cake.webp" alt={c.cakeAlt} width={736} height={736} loading="lazy" className="block h-auto w-full" />
+          <figcaption className="bg-ink px-4 py-3 text-xs font-bold uppercase tracking-[0.16em] text-beige">{c.clipCaption}</figcaption>
+        </figure>
       </Reveal>
       {/* easter egg 6 */}
       <div>

@@ -1,7 +1,6 @@
 import { content } from '../data/content';
-import { photos } from '../data/photos';
-import { Reveal, Section, SectionHeading, Split } from '../components/Reveal';
-import Photo from '../components/Photo';
+import { Lines, Reveal, Section, SectionHeading, Split } from '../components/Reveal';
+import TypingChat from '../components/TypingChat';
 
 const u = content.unsaid;
 
@@ -14,18 +13,12 @@ export default function Unsaid() {
         text={
           <>
             <SectionHeading kicker={u.kicker} title={u.title} />
-            <div className="flex flex-col gap-6">
-              {u.copy.map((l, i) => (
-                <Reveal key={i} y={8}>
-                  <p className="text-lg font-light leading-relaxed text-fg sm:text-xl">{l}</p>
-                </Reveal>
-              ))}
-            </div>
+            <Lines lines={u.copy} budget={150} gap="gap-5" lineClass="text-lg font-light leading-relaxed text-fg" />
           </>
         }
         visual={
           <Reveal y={10}>
-            <Photo src={photos.founder} alt="A candid moment" hint="public/images/founder.jpg" parallax className="mx-auto aspect-[4/5] w-full max-w-md [filter:grayscale(0.35)]" />
+            <TypingChat contactName={u.chat.contactName} label={u.chat.label} caption={u.chat.caption} history={u.chat.history} drafts={u.chat.drafts} className="mx-auto w-full max-w-sm" />
           </Reveal>
         }
       />

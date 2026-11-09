@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Phone, PhoneOff } from 'lucide-react';
 import { content } from '../data/content';
-import { photos } from '../data/photos';
+import { clips, photos } from '../data/photos';
 import { Lines, Reveal, Section, SectionHeading, Split } from '../components/Reveal';
 import Button from '../components/Button';
-import Photo from '../components/Photo';
+import LoopClip from '../components/LoopClip';
 import { sfx } from '../lib/audio';
 
 const d = content.don;
@@ -18,7 +18,7 @@ export default function Don() {
     <>
       <SectionHeading kicker={d.kicker} title={d.title} />
       <Lines lines={d.intro} lineClass="text-lg font-semibold" gap="gap-2" />
-      <ul className="mb-10 mt-5 flex flex-col gap-3">
+      <ul className="mb-6 mt-4 flex flex-col gap-2">
         {d.services.map((s, i) => (
           <motion.li key={s} initial={{ opacity: 0, x: -16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.07, duration: 0.5 }} className="flex gap-3 text-fg/90">
             <span aria-hidden className="mt-2.5 h-0.5 w-5 shrink-0 bg-accent" />
@@ -84,9 +84,9 @@ export default function Don() {
     <Reveal y={50}>
       <div className="relative mx-auto max-w-md">
         <motion.div initial={{ scale: 1.1, filter: 'grayscale(1)' }} whileInView={{ scale: 1, filter: 'grayscale(0)' }} viewport={{ once: true }} transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}>
-          <Photo src={photos.funny} alt="The Founder, looking suspiciously like a Don" hint="public/images/funny.jpg" className="aspect-[4/5] w-full" />
+          <LoopClip src={clips.catGlasses} poster={photos.funny} label={d.clipLabel} caption={d.clipCaption} aspect="aspect-[4/3] md:aspect-[4/5]" tag="LIVE" />
         </motion.div>
-        <motion.div initial={{ opacity: 0, scale: 3, rotate: -28 }} whileInView={{ opacity: 1, scale: 1, rotate: -10 }} viewport={{ once: true }} transition={{ type: 'spring', stiffness: 150, damping: 12, delay: 1 }} className="stamp absolute -bottom-5 -right-2 bg-beige px-6 py-2 text-4xl text-maroon sm:-right-6 sm:text-5xl">
+        <motion.div initial={{ opacity: 0, scale: 3, rotate: -28 }} whileInView={{ opacity: 1, scale: 1, rotate: -10 }} viewport={{ once: true }} transition={{ type: 'spring', stiffness: 150, damping: 12, delay: 1 }} className="stamp absolute -right-2 bottom-20 bg-beige px-6 py-2 text-4xl text-maroon sm:-right-6 sm:text-5xl">
           DON
         </motion.div>
       </div>

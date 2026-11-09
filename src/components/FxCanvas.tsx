@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 
 type P = { x: number; y: number; vx: number; vy: number; life: number; max: number; r: number; c: string };
 
-const COLORS = ['#E9DFCF', '#FFFFFF', '#8E2B3B'];
+const COLORS = ['#FFFFFF', '#0B0B0B', '#8A8A8A', '#BDBDBD'];
 
 /** Fixed canvas that draws small confetti bursts fired with burst() from lib/fx. */
 export default function FxCanvas() {
