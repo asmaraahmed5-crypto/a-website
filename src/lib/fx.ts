@@ -1,4 +1,4 @@
-/** Fire gold particles from a point (viewport coords) or from the centre of an element. */
+/** Fire confetti particles from a point (viewport coords) or from the centre of an element. */
 export function burst(x?: number, y?: number, n = 60) {
   window.dispatchEvent(new CustomEvent('fx-burst', { detail: { x, y, n } }));
 }

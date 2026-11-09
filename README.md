@@ -1,8 +1,8 @@
 # The Road to 30
 
-A luxury-noir, cinematic, interactive birthday surprise: twelve sections, a swipe card, a letter, a countdown, six easter eggs and an ice cream case that stays open.
+A corporate-style interactive birthday surprise: twelve left/right sections in black, white, beige and maroon, with a swipe card, a letter, a countdown, six easter eggs and an ice cream case that stays open.
 
-Built with React, Vite, TypeScript, Tailwind CSS, Framer Motion and Lucide icons. No backend. Design system chosen with the ui-ux-pro-max skill (accessibility, 44px touch targets, visible focus, reduced motion), using the requested black and antique-gold palette.
+Built with React, Vite, TypeScript, Tailwind CSS, Framer Motion and Lucide icons. No backend. Design rules from the ui-ux-pro-max skill (accessibility, 44px touch targets, visible focus, reduced motion). Montserrat throughout, solid colours only (no gradients), and every corner radius is 7px.
 
 ## Install and run
 
@@ -40,6 +40,12 @@ npm run preview   # test the production build locally
 
 A missing photo shows an elegant "Photo coming soon" placeholder, never a broken image.
 
+## Colours, font and corners
+
+- Section colours are themes in `src/styles/index.css` (`theme-dark`, `theme-light`, `theme-beige`, `theme-maroon`). Each section picks one with its `theme` prop.
+- The 7px corner radius is set once in `tailwind.config.js` (`borderRadius`).
+- The font is Montserrat, loaded in `index.html`.
+
 ## Customise the text
 
 Everything written on the site is in `src/data/content.ts`. Each string in an array is one paragraph. The birthday date (`birthday`) also lives there, so the countdown follows it.
@@ -57,9 +63,9 @@ Everything written on the site is in `src/data/content.ts`. Each string in an ar
 - Timeline, company cards (hover or tap), the envelope letter, drama meter, appreciation badge, Chotu DON hotline, Cat CEO Approval Meter, compliance checklist and score, live countdown, golden envelope, ORDER ICE CREAM and CASE CLOSED?.
 - The countdown shows "THE BIG DAY HAS ARRIVED." once February 3, 2027 passes and never breaks.
 - Six easter eggs: a hidden dot at the end of the timeline, a faint paw in the cats section, a tiny gold button in the footer, a "CEO has been detected smiling" notification after the swipe, a "please restart human" notification in the compliance section, and DO NOT PRESS. The footer counts secrets found.
-- Sound is off until the visitor presses the toggle (top right). It is synthesised in the browser, so there are no audio files.
+- Sound is off until the visitor presses the toggle in the top bar. It is synthesised in the browser, so there are no audio files.
 - Progress (intro seen, swipe, checklist, secrets) is saved in localStorage. "Replay the intro" in the footer clears it.
-- `prefers-reduced-motion` is respected. The cursor ring only appears on devices with a mouse.
+- `prefers-reduced-motion` is respected.
 
 ## Structure
 
@@ -70,8 +76,8 @@ src/
   data/photos.ts        all photo paths
   sections/             Hero, Bumble, Promise, Note, Overthinking, Appreciation,
                         Don, Cats, Compliance, Unsaid, Countdown, Final
-  components/           Photo (safe placeholder), Reveal, GoldButton, Nav, FxCanvas,
-                        CursorGlow, Notifier, SoundToggle, Art, Footer
+  components/           Photo (safe placeholder), Reveal (Section, Split), Button,
+                        FxCanvas, Header, Notifier, Art, Button, Footer
   lib/                  store (localStorage), notifications, fx, audio
   styles/index.css
 public/images/          your photos go here

@@ -1,25 +1,37 @@
 /** @type {import('tailwindcss').Config} */
+const token = (name) => `rgb(var(--${name}) / <alpha-value>)`;
+
 export default {
   content: ['./index.html', './src/**/*.{ts,tsx}'],
   theme: {
+    // every corner in the project is 7px
+    borderRadius: {
+      none: '0',
+      sm: '7px',
+      DEFAULT: '7px',
+      md: '7px',
+      lg: '7px',
+      xl: '7px',
+      '2xl': '7px',
+      '3xl': '7px',
+      full: '7px',
+    },
     extend: {
       colors: {
-        midnight: '#080808',
-        charcoal: '#151515',
-        gold: { DEFAULT: '#C6A56B', soft: '#E8D8B8', deep: '#8F7440' },
-        champagne: '#E8D8B8',
-        ivory: '#F5F0E7',
-        dim: '#777777',
-        mute: '#A39E94',
-        alert: '#C0524A',
+        ink: '#0B0B0B',
+        maroon: '#6B1F2A',
+        beige: '#E9DFCF',
+        // themed per section (see styles/index.css)
+        bg: token('bg'),
+        fg: token('fg'),
+        accent: token('accent'),
+        mute: token('mute'),
+        card: token('card'),
+        onaccent: token('onaccent'),
       },
       fontFamily: {
-        serif: ['"Playfair Display"', 'Georgia', 'serif'],
-        display: ['"Cormorant Garamond"', 'Georgia', 'serif'],
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        hand: ['Caveat', 'cursive'],
+        sans: ['Montserrat', 'system-ui', 'sans-serif'],
       },
-      letterSpacing: { wider2: '0.28em', wider3: '0.4em' },
     },
   },
   plugins: [],

@@ -1,10 +1,8 @@
 import { MotionConfig } from 'framer-motion';
-import CursorGlow from './components/CursorGlow';
 import Footer from './components/Footer';
 import FxCanvas from './components/FxCanvas';
-import Nav from './components/Nav';
+import Header from './components/Header';
 import Notifier from './components/Notifier';
-import SoundToggle from './components/SoundToggle';
 import Hero from './sections/Hero';
 import Bumble from './sections/Bumble';
 import PromiseSection from './sections/Promise';
@@ -23,11 +21,9 @@ export default function App() {
   const { begun } = useSaved();
   return (
     <MotionConfig reducedMotion="user">
-      <FxCanvas ambient={begun} />
-      <CursorGlow />
-      <SoundToggle />
+      <FxCanvas />
+      <Header showNav={begun} />
       <Notifier />
-      {begun && <Nav />}
       <main>
         <Hero />
         {begun && (

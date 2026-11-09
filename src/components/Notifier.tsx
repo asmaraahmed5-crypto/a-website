@@ -13,18 +13,18 @@ export default function Notifier() {
             key={n.id}
             role="status"
             layout
-            initial={{ opacity: 0, y: 30, scale: 0.96 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.97 }}
-            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-            className="pointer-events-auto flex w-full max-w-sm items-start gap-3 rounded-2xl border border-gold/40 bg-charcoal/95 p-4 shadow-[0_10px_50px_rgba(0,0,0,0.6)] backdrop-blur"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            className="pointer-events-auto flex w-full max-w-sm items-start gap-3 rounded border-l-4 border-beige bg-ink p-4 text-white shadow-xl"
           >
-            <span className="mt-0.5 text-gold">{n.kind === 'secret' ? <Sparkles size={18} /> : <BellRing size={18} />}</span>
+            <span className="mt-0.5 text-beige">{n.kind === 'secret' ? <Sparkles size={18} /> : <BellRing size={18} />}</span>
             <div className="flex-1">
-              <p className="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-gold">{n.title}</p>
-              <p className="mt-1 text-sm leading-snug text-ivory/90">{n.body}</p>
+              <p className="text-[0.65rem] font-bold uppercase tracking-[0.22em] text-beige">{n.title}</p>
+              <p className="mt-1 text-sm leading-snug text-white">{n.body}</p>
             </div>
-            <button type="button" aria-label="Dismiss notification" onClick={() => dismiss(n.id)} className="grid h-8 w-8 shrink-0 place-items-center rounded-full text-mute hover:text-ivory">
+            <button type="button" aria-label="Dismiss notification" onClick={() => dismiss(n.id)} className="grid h-8 w-8 shrink-0 place-items-center rounded text-white/70 hover:text-white">
               <X size={16} />
             </button>
           </motion.div>

@@ -407,7 +407,7 @@ export const content = {
   final: {
     kicker: 'Case File Closed. Almost.',
     title: 'THE FINAL INVESTIGATION',
-    envelopeHint: 'Open the golden envelope',
+    envelopeHint: 'Open the final envelope',
     letter: [
       'Well, Dear Founder and CEO,',
       'This concludes the November presentation.',

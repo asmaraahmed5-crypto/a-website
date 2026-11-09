@@ -1,9 +1,9 @@
 import { useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { content } from '../data/content';
-import { Lines, Reveal, Section, SectionHeading } from '../components/Reveal';
-import GoldButton from '../components/GoldButton';
-import { IceCream } from '../components/Art';
+import { Lines, Reveal, Section, SectionHeading, Split } from '../components/Reveal';
+import Button from '../components/Button';
+import { Envelope, IceCream } from '../components/Art';
 import { burst, burstFrom } from '../lib/fx';
 import { sfx } from '../lib/audio';
 
@@ -19,8 +19,8 @@ export default function Final() {
     if (stage !== 'closed') return;
     setStage('opening');
     sfx.open();
-    window.setTimeout(() => burstFrom(el, 90), 1400);
-    window.setTimeout(() => setStage('open'), 2200);
+    window.setTimeout(() => burstFrom(el, 90), 1200);
+    window.setTimeout(() => setStage('open'), 2000);
   };
 
   const order = () => {
@@ -29,64 +29,37 @@ export default function Final() {
     window.setTimeout(() => burstFrom(orderRef.current, 90), 200);
   };
 
-  return (
-    <Section id="final" index={12} narrow className="pb-40">
+  const text = (
+    <>
       <SectionHeading kicker={f.kicker} title={f.title} />
-
       {stage !== 'open' && (
-        <div className="flex flex-col items-center">
-          <motion.button
-            type="button"
-            aria-label={f.envelopeHint}
-            disabled={stage !== 'closed'}
-            onClick={(e) => open(e.currentTarget)}
-            animate={stage === 'opening' ? { scale: [1, 1.06, 1.06], rotate: [0, -1.5, 1.5, -1, 0] } : { y: [0, -6, 0] }}
-            transition={stage === 'opening' ? { duration: 1.6 } : { duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
-            className="relative h-52 w-80 [perspective:900px] disabled:cursor-default"
-          >
-            <div className="absolute inset-0 rounded-md bg-gradient-to-br from-[#f0d88f] via-[#d9b25f] to-[#9d7a32] shadow-[0_0_80px_rgba(198,165,107,0.35)]" />
-            <svg aria-hidden viewBox="0 0 320 208" className="absolute inset-0 h-full w-full" preserveAspectRatio="none">
-              <path d="M0 208 L160 100 L320 208 Z" fill="#c99f4c" />
-              <path d="M0 0 L0 208 L160 100 Z M320 0 L320 208 L160 100 Z" fill="#b48a3d" />
-            </svg>
-            <motion.div aria-hidden animate={{ rotateX: stage === 'closed' ? 0 : 180 }} transition={{ duration: 1.4, delay: 0.3, ease: 'easeInOut' }} style={{ transformOrigin: 'top' }} className="absolute inset-x-0 top-0 h-1/2">
-              <svg viewBox="0 0 320 104" className="h-full w-full" preserveAspectRatio="none">
-                <path d="M0 0 L320 0 L160 104 Z" fill="#f0d88f" stroke="#8F7440" />
-              </svg>
-            </motion.div>
-            <span className="absolute left-1/2 top-[49%] grid h-12 w-12 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-midnight font-serif text-gold ring-2 ring-gold/70">?</span>
-          </motion.button>
-          <p className="mt-8 text-xs uppercase tracking-[0.25em] text-mute" aria-live="polite">
-            {stage === 'opening' ? 'The envelope is opening…' : f.envelopeHint}
-          </p>
-        </div>
+        <p className="body-copy" aria-live="polite">
+          {stage === 'opening' ? 'The envelope is opening…' : 'One envelope remains. Open it to see the final instruction.'}
+        </p>
       )}
-
       {stage === 'open' && (
         <>
-          <Lines lines={f.letter} className="mx-auto" lineClass="font-display text-[1.4rem] leading-snug text-ivory/90 sm:text-2xl" gap="gap-6" />
+          <Lines lines={f.letter} lineClass="text-lg font-medium leading-relaxed text-fg sm:text-xl" gap="gap-5" />
 
-          <div className="mt-32 text-center">
-            <Reveal y={40}>
-              <h3 className="gold-text font-serif text-4xl font-bold leading-[1.1] tracking-wide sm:text-6xl">{f.headline}</h3>
-            </Reveal>
-          </div>
+          <Reveal y={30} className="mt-16">
+            <h3 className="text-3xl font-extrabold uppercase leading-[1.1] tracking-tight text-accent sm:text-5xl">{f.headline}</h3>
+          </Reveal>
 
-          <Lines lines={f.reveal} className="mt-14 text-center" lineClass="body-copy sm:text-lg" />
+          <Lines lines={f.reveal} className="mt-8" />
 
-          <Reveal className="mt-16" y={50}>
-            <div className="flex flex-col items-center gap-8" ref={orderRef}>
+          <Reveal className="mt-12" y={40}>
+            <div className="flex flex-col items-start gap-7" ref={orderRef}>
               <motion.div animate={ordered ? { y: [0, -18, 0], rotate: [0, -6, 6, 0] } : { y: [0, -5, 0] }} transition={ordered ? { duration: 0.8, repeat: 3 } : { duration: 3, repeat: Infinity }}>
                 <IceCream size={ordered ? 150 : 120} />
               </motion.div>
 
               {!ordered ? (
-                <GoldButton onClick={order}>{f.order}</GoldButton>
+                <Button onClick={order}>{f.order}</Button>
               ) : (
                 <AnimatePresence>
-                  <motion.div initial={{ opacity: 0, y: 20, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }} className="card w-full max-w-md p-7 text-center" role="alert">
-                    <p className="stamp mx-auto mb-5 inline-block -rotate-3 text-gold">{f.orderReply[0]}</p>
-                    <div className="flex flex-col gap-2 text-ivory/90">
+                  <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="card w-full p-6" role="alert">
+                    <p className="stamp mb-4 inline-block -rotate-2 text-accent">{f.orderReply[0]}</p>
+                    <div className="flex flex-col gap-2">
                       {f.orderReply.slice(1).map((l) => (
                         <p key={l}>{l}</p>
                       ))}
@@ -95,7 +68,7 @@ export default function Final() {
                 </AnimatePresence>
               )}
 
-              <GoldButton
+              <Button
                 variant="ghost"
                 onClick={() => {
                   setClosed(true);
@@ -108,11 +81,34 @@ export default function Final() {
                     {closed ? f.closedReply : f.closed}
                   </motion.span>
                 </AnimatePresence>
-              </GoldButton>
+              </Button>
             </div>
           </Reveal>
         </>
       )}
+    </>
+  );
+
+  const visual = (
+    <div className="flex flex-col items-center">
+      <motion.button
+        type="button"
+        aria-label={f.envelopeHint}
+        disabled={stage !== 'closed'}
+        onClick={(e) => open(e.currentTarget)}
+        animate={stage === 'opening' ? { scale: [1, 1.05, 1.05], rotate: [0, -1.5, 1.5, -1, 0] } : { y: [0, -6, 0] }}
+        transition={stage === 'opening' ? { duration: 1.6 } : { duration: 3.4, repeat: Infinity, ease: 'easeInOut' }}
+        className="h-56 w-80 max-w-full disabled:cursor-default sm:h-64 sm:w-96"
+      >
+        <Envelope open={stage !== 'closed'} seal="?" />
+      </motion.button>
+      {stage === 'closed' && <p className="mt-6 text-xs font-semibold uppercase tracking-[0.22em] text-mute">{f.envelopeHint}</p>}
+    </div>
+  );
+
+  return (
+    <Section id="final" index={12} theme="dark" className="md:pb-40">
+      <Split flip text={text} visual={visual} />
     </Section>
   );
 }
